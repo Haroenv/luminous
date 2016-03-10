@@ -194,8 +194,6 @@ exports.VERSION = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _dom = require('./util/dom');
-
 var _injectBaseStylesheet = require('./injectBaseStylesheet');
 
 var _injectBaseStylesheet2 = _interopRequireDefault(_injectBaseStylesheet);
@@ -222,7 +220,7 @@ var Luminous = function () {
 
     this.trigger = trigger;
 
-    if (!(0, _dom.isDOMElement)(this.trigger)) {
+    if (!isDOMElement(this.trigger)) {
       throw new TypeError('`new Luminous` requires a DOM element as its first argument.');
     }
 
@@ -402,7 +400,7 @@ exports.default = Luminous;
 global.Luminous = Luminous;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./Lightbox":1,"./injectBaseStylesheet":3,"./util/dom":4}],3:[function(require,module,exports){
+},{"./Lightbox":1,"./injectBaseStylesheet":3}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -424,38 +422,6 @@ function injectBaseStylesheet() {
 
   var head = document.head;
   head.insertBefore(styleEl, head.firstChild);
-}
-
-},{}],4:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-exports.isDOMElement = isDOMElement;
-exports.addClasses = addClasses;
-exports.removeClasses = removeClasses;
-// This is not really a perfect check, but works fine.
-// From http://stackoverflow.com/questions/384286
-var HAS_DOM_2 = (typeof HTMLElement === 'undefined' ? 'undefined' : _typeof(HTMLElement)) === 'object';
-
-function isDOMElement(obj) {
-  return HAS_DOM_2 ? obj instanceof HTMLElement : obj && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object' && obj !== null && obj.nodeType === 1 && typeof obj.nodeName === 'string';
-}
-
-function addClasses(el, classNames) {
-  classNames.forEach(function (className) {
-    el.classList.add(className);
-  });
-}
-
-function removeClasses(el, classNames) {
-  classNames.forEach(function (className) {
-    el.classList.remove(className);
-  });
 }
 
 },{}]},{},[2]);

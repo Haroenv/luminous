@@ -1,4 +1,3 @@
-import { isDOMElement } from './util/dom';
 import injectBaseStylesheet from './injectBaseStylesheet';
 import Lightbox from './Lightbox';
 
