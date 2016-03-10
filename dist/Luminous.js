@@ -1,19 +1,11 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _dom = require('./util/dom');
-
-var _throwIfMissing = require('./util/throwIfMissing');
-
-var _throwIfMissing2 = _interopRequireDefault(_throwIfMissing);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -21,7 +13,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // account for, just in case.
 var HAS_ANIMATION = 'animation' in document.createElement('div').style;
 
-var Lightbox = (function () {
+var Lightbox = function () {
   function Lightbox() {
     var _this = this;
 
@@ -38,32 +30,33 @@ var Lightbox = (function () {
     this._completeOpen = function () {
       _this.el.removeEventListener('animationend', _this._completeOpen, false);
 
-      (0, _dom.removeClasses)(_this.el, _this.openingClasses);
+      removeClasses(_this.el, _this.openingClasses);
     };
 
     this._completeClose = function () {
       _this.el.removeEventListener('animationend', _this._completeClose, false);
 
-      (0, _dom.removeClasses)(_this.el, _this.openClasses);
-      (0, _dom.removeClasses)(_this.el, _this.closingClasses);
+      removeClasses(_this.el, _this.openClasses);
+      removeClasses(_this.el, _this.closingClasses);
     };
 
     var _options$namespace = options.namespace;
     var namespace = _options$namespace === undefined ? null : _options$namespace;
     var _options$parentEl = options.parentEl;
-    var parentEl = _options$parentEl === undefined ? (0, _throwIfMissing2.default)() : _options$parentEl;
+    var parentEl = _options$parentEl === undefined ? throwIfMissing() : _options$parentEl;
     var _options$triggerEl = options.triggerEl;
-    var triggerEl = _options$triggerEl === undefined ? (0, _throwIfMissing2.default)() : _options$triggerEl;
+    var triggerEl = _options$triggerEl === undefined ? throwIfMissing() : _options$triggerEl;
     var _options$sourceAttrib = options.sourceAttribute;
-    var sourceAttribute = _options$sourceAttrib === undefined ? (0, _throwIfMissing2.default)() : _options$sourceAttrib;
+    var sourceAttribute = _options$sourceAttrib === undefined ? throwIfMissing() : _options$sourceAttrib;
     var _options$captionAttri = options.captionAttribute;
-    var captionAttribute = _options$captionAttri === undefined ? (0, _throwIfMissing2.default)() : _options$captionAttri;
+    var captionAttribute = _options$captionAttri === undefined ? throwIfMissing() : _options$captionAttri;
     var _options$includeImgix = options.includeImgixJSClass;
     var includeImgixJSClass = _options$includeImgix === undefined ? false : _options$includeImgix;
 
+
     this.settings = { namespace: namespace, parentEl: parentEl, triggerEl: triggerEl, sourceAttribute: sourceAttribute, captionAttribute: captionAttribute, includeImgixJSClass: includeImgixJSClass };
 
-    if (!(0, _dom.isDOMElement)(this.settings.parentEl)) {
+    if (!isDOMElement(this.settings.parentEl)) {
       throw new TypeError('`new Lightbox` requires a DOM element passed as `parentEl`.');
     }
 
@@ -90,29 +83,29 @@ var Lightbox = (function () {
     key: '_buildElement',
     value: function _buildElement() {
       this.el = document.createElement('div');
-      (0, _dom.addClasses)(this.el, this._buildClasses('lightbox'));
+      addClasses(this.el, this._buildClasses('lightbox'));
 
       this.innerEl = document.createElement('div');
-      (0, _dom.addClasses)(this.innerEl, this._buildClasses('lightbox-inner'));
+      addClasses(this.innerEl, this._buildClasses('lightbox-inner'));
       this.el.appendChild(this.innerEl);
 
       var loaderEl = document.createElement('div');
-      (0, _dom.addClasses)(loaderEl, this._buildClasses('lightbox-loader'));
+      addClasses(loaderEl, this._buildClasses('lightbox-loader'));
       this.innerEl.appendChild(loaderEl);
 
       this.imgWrapperEl = document.createElement('div');
-      (0, _dom.addClasses)(this.imgWrapperEl, this._buildClasses('lightbox-image-wrapper'));
+      addClasses(this.imgWrapperEl, this._buildClasses('lightbox-image-wrapper'));
       this.innerEl.appendChild(this.imgWrapperEl);
 
       var positionHelperEl = document.createElement('span');
-      (0, _dom.addClasses)(positionHelperEl, this._buildClasses('lightbox-position-helper'));
+      addClasses(positionHelperEl, this._buildClasses('lightbox-position-helper'));
       this.imgWrapperEl.appendChild(positionHelperEl);
 
       this.imgEl = document.createElement('img');
       positionHelperEl.appendChild(this.imgEl);
 
       this.captionEl = document.createElement('p');
-      (0, _dom.addClasses)(this.captionEl, this._buildClasses('lightbox-caption'));
+      addClasses(this.captionEl, this._buildClasses('lightbox-caption'));
       positionHelperEl.appendChild(this.captionEl);
 
       this.settings.parentEl.appendChild(this.el);
@@ -156,14 +149,14 @@ var Lightbox = (function () {
       this._updateImgSrc();
       this._updateCaption();
 
-      (0, _dom.addClasses)(this.el, this.openClasses);
+      addClasses(this.el, this.openClasses);
 
       this._sizeImgWrapperEl();
       window.addEventListener('resize', this._sizeImgWrapperEl, false);
 
       if (HAS_ANIMATION) {
         this.el.addEventListener('animationend', this._completeOpen, false);
-        (0, _dom.addClasses)(this.el, this.openingClasses);
+        addClasses(this.el, this.openingClasses);
       }
     }
   }, {
@@ -173,9 +166,9 @@ var Lightbox = (function () {
 
       if (HAS_ANIMATION) {
         this.el.addEventListener('animationend', this._completeClose, false);
-        (0, _dom.addClasses)(this.el, this.closingClasses);
+        addClasses(this.el, this.closingClasses);
       } else {
-        (0, _dom.removeClasses)(this.el, this.openClasses);
+        removeClasses(this.el, this.openClasses);
       }
     }
   }, {
@@ -186,20 +179,20 @@ var Lightbox = (function () {
   }]);
 
   return Lightbox;
-})();
+}();
 
 exports.default = Lightbox;
 
-},{"./util/dom":4,"./util/throwIfMissing":5}],2:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 (function (global){
 'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.VERSION = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dom = require('./util/dom');
 
@@ -217,7 +210,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var VERSION = exports.VERSION = '0.2.3';
 
-var Luminous = (function () {
+var Luminous = function () {
   function Luminous(trigger) {
     var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
@@ -292,6 +285,7 @@ var Luminous = (function () {
     // section of README.md for more information.
     injectBaseStyles = _options$injectBaseSt === undefined ? true : _options$injectBaseSt;
 
+
     this.settings = { namespace: namespace, sourceAttribute: sourceAttribute, captionAttribute: captionAttribute, openTrigger: openTrigger, closeTrigger: closeTrigger, closeWithEscape: closeWithEscape, closeOnScroll: closeOnScroll, appendToSelector: appendToSelector, onOpen: onOpen, onClose: onClose, includeImgixJSClass: includeImgixJSClass, injectBaseStyles: injectBaseStyles };
 
     if (this.settings.injectBaseStyles) {
@@ -341,7 +335,7 @@ var Luminous = (function () {
   }]);
 
   return Luminous;
-})();
+}();
 
 var _initialiseProps = function _initialiseProps() {
   var _this = this;
@@ -404,6 +398,7 @@ var _initialiseProps = function _initialiseProps() {
 
 exports.default = Luminous;
 
+
 global.Luminous = Luminous;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
@@ -437,12 +432,12 @@ function injectBaseStylesheet() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 exports.isDOMElement = isDOMElement;
 exports.addClasses = addClasses;
 exports.removeClasses = removeClasses;
-
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
-
 // This is not really a perfect check, but works fine.
 // From http://stackoverflow.com/questions/384286
 var HAS_DOM_2 = (typeof HTMLElement === 'undefined' ? 'undefined' : _typeof(HTMLElement)) === 'object';
@@ -461,17 +456,6 @@ function removeClasses(el, classNames) {
   classNames.forEach(function (className) {
     el.classList.remove(className);
   });
-}
-
-},{}],5:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = throwIfMissing;
-function throwIfMissing() {
-  throw new Error('Missing parameter');
 }
 
 },{}]},{},[2]);
